@@ -44,8 +44,8 @@ def movedat():
                         # file_moved: ./patch/1000-1001/updatepack/pakv4/0/000.dat
                         # 或: ./patch/1000-1001/updatepack/pakv4/0/000.idx
                         if file_moved.exists() and file_moved.suffix == '.dat':
-                            shutil.move(file_moved, datdir / (patchname + '_' + file_moved.name))
-                            shutil.move(iddir / (file_moved.stem + '.idx'), datdir / (patchname + '_' + file_moved.stem + '.idx'))
+                            shutil.move(file_moved, datdir / (patchname + '_' + id + '_' + file_moved.name))
+                            shutil.move(iddir / (file_moved.stem + '.idx'), datdir / (patchname + '_' + id + '_' + file_moved.stem + '.idx'))
 
 
 if '__main__' == __name__:
