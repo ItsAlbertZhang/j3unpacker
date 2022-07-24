@@ -25,16 +25,16 @@ def movedat():
         if path_patch_version.is_dir():
             path_id_parent = path_patch_version / 'updatepack' / 'pakv4'
             # path_id_parent: ./patch/1000-1001/updatepack/pakv4
-            for path_id_parent in path_id_parent.iterdir():
-                # path_id_parent: ./patch/1000-1001/updatepack/pakv4/1000-1001(1.0.0.1000-1.0.0.1001).update (实际上只有一个目录)
-                for path_id in path_id_parent.iterdir():
-                    # path_id: ./patch/1000-1001/updatepack/pakv4/1000-1001(1.0.0.1000-1.0.0.1001).update/0 等
-                    if path_id.is_dir():
-                        for path_datfile in path_id.iterdir():
-                            # path_datfile: ./patch/1000-1001/updatepack/pakv4/1000-1001(1.0.0.1000-1.0.0.1001).update/0/000.dat 等
-                            if path_datfile.exists() and path_datfile.suffix == '.dat':
-                                shutil.move(path_datfile, path_dat / (path_patch_version.name + '_' + path_id.name + '_' + path_datfile.name))
-                                shutil.move(path_id / (path_datfile.stem + '.idx'), path_dat / (path_patch_version.name + '_' + path_id.name + '_' + path_datfile.stem + '.idx'))
+            path_id_parent = path_id_parent.iterdir().__next__()
+            # path_id_parent: ./patch/1000-1001/updatepack/pakv4/1000-1001(1.0.0.1000-1.0.0.1001).update
+            for path_id in path_id_parent.iterdir():
+                # path_id: ./patch/1000-1001/updatepack/pakv4/1000-1001(1.0.0.1000-1.0.0.1001).update/0 等
+                if path_id.is_dir():
+                    for path_datfile in path_id.iterdir():
+                        # path_datfile: ./patch/1000-1001/updatepack/pakv4/1000-1001(1.0.0.1000-1.0.0.1001).update/0/000.dat 等
+                        if path_datfile.exists() and path_datfile.suffix == '.dat':
+                            shutil.move(path_datfile, path_dat / (path_patch_version.name + '_' + path_id.name + '_' + path_datfile.name))
+                            shutil.move(path_id / (path_datfile.stem + '.idx'), path_dat / (path_patch_version.name + '_' + path_id.name + '_' + path_datfile.stem + '.idx'))
 
 
 if '__main__' == __name__:
