@@ -1,4 +1,3 @@
-from genericpath import isdir
 from pathlib import Path
 import zipfile
 import shutil
